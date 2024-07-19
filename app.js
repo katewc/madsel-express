@@ -1,6 +1,8 @@
 const express = require("express");
 const app = express();
-app.use(express.bodyParser());
+// parse urlencoded request bodies into req.body
+var bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({extended: false}));
 const port = process.env.PORT || 3001;
 
 app.get("/", (req, res) => res.type('html').send(html));
