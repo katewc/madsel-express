@@ -9,6 +9,8 @@ app.post("/inquiry", (req, res) => {
   console.log('/inquiry');
   console.log(req.body);
   res.setHeader('Access-Control-Allow-Origin', 'https://project-q0slp7zm54dzt3zkoskp.framercanvas.com');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   return res.status(200).send(req.body);
 });
 
