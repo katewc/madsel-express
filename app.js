@@ -9,7 +9,7 @@ app.post("/inquiry", (req, res) => {
   console.log('/inquiry');
   console.log(req.body);
   res.setHeader('Access-Control-Allow-Origin', 'https://project-q0slp7zm54dzt3zkoskp.framercanvas.com');
-  return res.status(200).send('success');
+  return res.status(200).send(req.body);
 });
 
 const server = app.listen(port, () => console.log(`Example app listening on port ${port}!`));
