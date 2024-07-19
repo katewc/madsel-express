@@ -5,6 +5,7 @@ const port = process.env.PORT || 3001;
 app.get("/", (req, res) => res.type('html').send(html));
 app.post("/inquiry", (req, res) => {
   console.log('/inquiry');
+  console.log(req.body);
   res.setHeader('Access-Control-Allow-Origin', 'https://project-q0slp7zm54dzt3zkoskp.framercanvas.com');
   return res.status(200).send('success');
 });
