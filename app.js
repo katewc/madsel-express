@@ -1,14 +1,13 @@
 const express = require("express");
 const app = express();
-// parse urlencoded request bodies into req.body
-var bodyParser = require('body-parser');
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(express.json())
+app.use(express.urlencoded({extended: true}))
 const port = process.env.PORT || 3001;
 
 app.get("/", (req, res) => res.type('html').send(html));
 app.post("/inquiry", (req, res) => {
   console.log('/inquiry');
-  console.dir(req.body);
+  console.log(req.body);
   res.setHeader('Access-Control-Allow-Origin', 'https://project-q0slp7zm54dzt3zkoskp.framercanvas.com');
   return res.status(200).send('success');
 });
