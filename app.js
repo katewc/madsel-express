@@ -4,7 +4,9 @@ const port = process.env.PORT || 3001;
 
 app.get("/", (req, res) => res.type('html').send(html));
 app.post("/inquiry", (req, res) => {
-  return res.send('success');
+  console.log(req);
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  return res.status(200).send('success');
 });
 
 const server = app.listen(port, () => console.log(`Example app listening on port ${port}!`));
