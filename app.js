@@ -3,10 +3,23 @@ const app = express();
 const port = process.env.PORT || 3001;
 
 app.get("/", (req, res) => res.type('html').send(html));
-app.post("/inquiry", (req, res) => {
+app.post("/inquiry", async (req, res) => {
   console.log(req);
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  return res.status(200).send('success');
+  const headers = req.headers;
+  const response = await fetch(
+      "https://api.lodgify.com/v1/reservation/enquiry",
+      {
+          method: "POST",
+          headers: { ...headers, "X-ApiKey": process.env.X_APIKEY },
+          body: JSON.stringify(body),
+      }
+  )
+
+  if (!response.ok) {
+    return res.status(500).send('failure');
+  }
+  response.setHeader('Access-Control-Allow-Origin', '*');
+  return response;
 });
 
 const server = app.listen(port, () => console.log(`Example app listening on port ${port}!`));
