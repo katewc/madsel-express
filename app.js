@@ -13,20 +13,16 @@ app.post("/inquiry", async (req, res) => {
   console.log(process.env.LODGIFY_APIKEY);
   console.log(JSON.stringify(req.body));
 
-  const options = {
-    method: 'POST',
-    headers: {
-      accept: 'application/json',
-      'content-type': 'application/*+json',
-      'X-ApiKey': process.env.LODGIFY_APIKEY
-    },
-    body: '{"guest":{"name":"Katie","email":"kwcisel@gmail.com"},"source_text":"aframeofmindcabin.com","source_address":"kwcisel@gmail.com","messages":[{"subject":"Test message 4","message":"Test message","type":"Renter","send_notification":true}],"has_privacy_consent":true}'
+  const headers = {
+    accept: 'application/json',
+    'content-type': 'application/*+json',
+    'X-ApiKey': process.env.LODGIFY_APIKEY
   };
   const response = await fetch(
       "https://api.lodgify.com/v1/reservation/enquiry",
       {
           method: "POST",
-          headers: options.headers,
+          headers: headers,
           body: JSON.stringify(req.body),
       }
   )
@@ -34,11 +30,18 @@ app.post("/inquiry", async (req, res) => {
   console.log(response);
 
   if (!response.ok) {
-    return res.status(response.status).send();
+    return res.status(response.status).send(response.statusText);
   }
-  res.setHeader('Access-Control-Allow-Origin', 'https://project-q0slp7zm54dzt3zkoskp.framercanvas.com');
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  const corsWhitelist = [
+    'https://project-q0slp7zm54dzt3zkoskp.framercanvas.com',
+    'https://navy-kimchi-571581.framer.app',
+  ];
+  if (corsWhitelist.indexOf(req.headers.origin) !== -1) {
+    res.header('Access-Control-Allow-Origin', req.headers.origin);
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  }
+  
   return res.status(200).send(req.body);
 });
 
