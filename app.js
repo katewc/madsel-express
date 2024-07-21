@@ -13,7 +13,7 @@ app.post("/inquiry", async (req, res) => {
   console.log(process.env.LODGIFY_APIKEY);
   console.log(JSON.stringify(req.body));
 
-  /*const options = {
+  const options = {
     method: 'POST',
     headers: {
       accept: 'application/json',
@@ -31,16 +31,15 @@ app.post("/inquiry", async (req, res) => {
       }
   )
 
-  console.log(response);*/
-  return res.status(200).send();
+  console.log(response);
 
-  /*if (!response.ok) {
+  if (!response.ok) {
     return res.status(response.status).send();
   }
   res.setHeader('Access-Control-Allow-Origin', 'https://project-q0slp7zm54dzt3zkoskp.framercanvas.com');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-  return res.status(200).send(req.body);*/
+  return res.status(200).send(req.body);
 });
 
 const server = app.listen(port, () => console.log(`Example app listening on port ${port}!`));
