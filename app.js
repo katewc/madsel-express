@@ -10,31 +10,36 @@ const port = process.env.PORT || 3001;
 app.get("/", (req, res) => res.status(200).send());
 app.post("/inquiry", async (req, res) => {
   console.log('/inquiry');
+  console.log(process.env.LODGIFY_API);
   console.log(req.body);
-  console.log(process.env.LODGIFY_APIKEY);
-  console.log(req.headers);
 
-  const headers = {
-      accept: "application/json",
-      "Content-Type": "application/*+json",
-      "X-ApiKey": process.env.LODGIFY_APIKEY
+  const options = {
+    method: 'POST',
+    headers: {
+      accept: 'application/json',
+      'content-type': 'application/*+json',
+      'X-ApiKey': process.env.LODGIFY_API
+    },
+    body: '{"guest":{"name":"Katie","email":"kwcisel@gmail.com"},"source_text":"aframeofmindcabin.com","source_address":"kwcisel@gmail.com","messages":[{"subject":"Test message 4","message":"Test message","type":"Renter","send_notification":true}],"has_privacy_consent":true}'
   };
   const response = await fetch(
       "https://api.lodgify.com/v1/reservation/enquiry",
       {
           method: "POST",
-          headers,
+          headers: options.headers,
           body: req.body,
       }
   )
 
-  if (!response.ok) {
+  console.log(response);
+
+  /*if (!response.ok) {
     return res.status(response.status).send();
   }
   res.setHeader('Access-Control-Allow-Origin', 'https://project-q0slp7zm54dzt3zkoskp.framercanvas.com');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-  return res.status(200).send(req.body);
+  return res.status(200).send(req.body);*/
 });
 
 const server = app.listen(port, () => console.log(`Example app listening on port ${port}!`));
