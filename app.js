@@ -24,7 +24,7 @@ app.post("/inquiry", async (req, res) => {
       {
           method: "POST",
           headers,
-          body: JSON.stringify(body),
+          body: req.body,
       }
   )
 
