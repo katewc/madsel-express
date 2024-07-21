@@ -7,10 +7,20 @@ app.use(express.urlencoded({extended: true}))
 app.use(cors());
 const port = process.env.PORT || 3001;
 
-app.get("/", (req, res) => res.type('html').send(html));
+app.get("/", (req, res) => res.status(200).send());
 app.post("/inquiry", (req, res) => {
   console.log('/inquiry');
   console.log(req.body);
+  console.log(process.env.LODGIFY_APIKEY);
+  console.log(req.headers);
+  /*const response = await fetch(
+      "https://api.lodgify.com/v1/reservation/enquiry",
+      {
+          method: "POST",
+          headers,
+          body: JSON.stringify(body),
+      }
+  )*/
   res.setHeader('Access-Control-Allow-Origin', 'https://project-q0slp7zm54dzt3zkoskp.framercanvas.com');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
