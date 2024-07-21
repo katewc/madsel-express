@@ -10,7 +10,7 @@ const port = process.env.PORT || 3001;
 app.get("/", (req, res) => res.status(200).send());
 app.post("/inquiry", async (req, res) => {
   console.log('/inquiry');
-  console.log(process.env.LODGIFY_API);
+  console.log(process.env.LODGIFY_APIKEY);
   console.log(req.body);
 
   const options = {
@@ -18,7 +18,7 @@ app.post("/inquiry", async (req, res) => {
     headers: {
       accept: 'application/json',
       'content-type': 'application/*+json',
-      'X-ApiKey': process.env.LODGIFY_API
+      'X-ApiKey': process.env.LODGIFY_APIKEY
     },
     body: '{"guest":{"name":"Katie","email":"kwcisel@gmail.com"},"source_text":"aframeofmindcabin.com","source_address":"kwcisel@gmail.com","messages":[{"subject":"Test message 4","message":"Test message","type":"Renter","send_notification":true}],"has_privacy_consent":true}'
   };
