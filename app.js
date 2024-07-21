@@ -11,9 +11,9 @@ app.get("/", (req, res) => res.status(200).send());
 app.post("/inquiry", async (req, res) => {
   console.log('/inquiry');
   console.log(process.env.LODGIFY_APIKEY);
-  console.log(req.body);
+  console.log(JSON.stringify(req.body));
 
-  const options = {
+  /*const options = {
     method: 'POST',
     headers: {
       accept: 'application/json',
@@ -27,11 +27,12 @@ app.post("/inquiry", async (req, res) => {
       {
           method: "POST",
           headers: options.headers,
-          body: req.body,
+          body: JSON.stringify(req.body),
       }
   )
 
-  console.log(response);
+  console.log(response);*/
+  return res.status(200).send();
 
   /*if (!response.ok) {
     return res.status(response.status).send();
