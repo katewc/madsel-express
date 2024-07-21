@@ -8,19 +8,29 @@ app.use(cors());
 const port = process.env.PORT || 3001;
 
 app.get("/", (req, res) => res.status(200).send());
-app.post("/inquiry", (req, res) => {
+app.post("/inquiry", async (req, res) => {
   console.log('/inquiry');
   console.log(req.body);
   console.log(process.env.LODGIFY_APIKEY);
   console.log(req.headers);
-  /*const response = await fetch(
+
+  const headers = {
+      accept: "application/json",
+      "Content-Type": "application/*+json",
+      "X-ApiKey": process.env.LODGIFY_APIKEY
+  };
+  const response = await fetch(
       "https://api.lodgify.com/v1/reservation/enquiry",
       {
           method: "POST",
           headers,
           body: JSON.stringify(body),
       }
-  )*/
+  )
+
+  if (!response.ok) {
+    return res.status(response.status).send();
+  }
   res.setHeader('Access-Control-Allow-Origin', 'https://project-q0slp7zm54dzt3zkoskp.framercanvas.com');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
